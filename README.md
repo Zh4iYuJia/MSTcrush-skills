@@ -70,6 +70,7 @@ pip3 install -r requirements.txt
 | `/{slug}-persona` | 性格模式 |
 | `/delete-crush {slug}` | 删除 |
 | `/let-go {slug}` | 温柔删除 |
+| `/destroy {slug}` | 销毁 — 生成总结后删除，鼓励走向现实 |
 
 ### 暗恋专属功能
 

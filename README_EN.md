@@ -70,6 +70,7 @@ In Claude Code, type:
 | `/{slug}-persona` | Persona mode |
 | `/delete-crush {slug}` | Delete |
 | `/let-go {slug}` | Gentle delete |
+| `/destroy {slug}` | Destroy - generate summary then delete, encourage moving on |
 
 ### Crush-Specific Features
 

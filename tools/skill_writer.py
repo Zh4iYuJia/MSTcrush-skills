@@ -4,7 +4,7 @@
 管理暗恋对象 Skill 的文件操作：列出、创建目录、生成组合 SKILL.md。
 
 Usage:
-    python3 skill_writer.py --action <list|init|combine> --base-dir <path> [--slug <slug>]
+    python3 skill_writer.py --action <list|init|combine|close|delete|destroy> --base-dir <path> [--slug <slug>]
 """
 
 import argparse
@@ -398,11 +398,99 @@ user-invocable: true
     print(f"已生成 {skill_path}")
 
 
+def close_skill(base_dir: str, slug: str, delete: bool = False):
+    from datetime import datetime
+    skill_dir = os.path.join(base_dir, slug)
+    meta_path = os.path.join(skill_dir, 'meta.json')
+    
+    if not os.path.exists(meta_path):
+        print(f"错误：meta.json 不存在 {meta_path}", file=sys.stderr)
+        sys.exit(1)
+    
+    with open(meta_path, 'r', encoding='utf-8') as f:
+        meta = json.load(f)
+    
+    name = meta.get('name', slug)
+    profile = meta.get('profile', {})
+    
+    created_at = meta.get('created_at', '')
+    duration_days = 0
+    if created_at:
+        try:
+            created_dt = datetime.strptime(created_at[:10], '%Y-%m-%d')
+            duration_days = (datetime.now() - created_dt).days
+        except:
+            pass
+    
+    chat_count = 0
+    message_count = 0
+    chats_dir = os.path.join(skill_dir, 'memories', 'chats')
+    if os.path.exists(chats_dir):
+        for f in os.listdir(chats_dir):
+            if f.endswith('.json'):
+                chat_count += 1
+                with open(os.path.join(chats_dir, f), 'r', encoding='utf-8') as cf:
+                    try:
+                        data = json.load(cf)
+                        message_count += len(data.get('messages', []))
+                    except:
+                        pass
+    
+    summary_path = os.path.join(skill_dir, 'summary.md')
+    summary = f"""# 总结
+
+## 数据统计
+
+| 项目 | 数值 |
+|------|------|
+| 持续天数 | {duration_days} 天 |
+| 聊天文件数 | {chat_count} |
+| 消息总数 | {message_count} 条 |
+| 职业 | {profile.get('occupation', '?')} |
+| 城市 | {profile.get('city', '?')} |
+
+## 结束语
+
+感谢你出现过，陪我走过这段路程。
+不是所有喜欢都要拥有，有时候放手也是一种成全。
+现在，是时候走向现实了。
+
+过去的就让它留在过去，未来的路在脚下。
+
+## 成长收获
+
+- 学会了喜欢一个人是什么感觉
+- 学会了等待和忍耐
+- 学会了把一个人放在心里是什么滋味
+- 学会了放手也是成长
+
+## 祝福
+
+{name}，祝你幸福。我也该继续自己的生活了。
+
+---
+
+*于 {datetime.now().strftime('%Y-%m-%d')} 结束，感谢这段相遇。*
+"""
+    
+    with open(summary_path, 'w', encoding='utf-8') as f:
+        f.write(summary)
+    print(f"已生成总结：{summary_path}")
+    
+    if delete:
+        import shutil
+        shutil.rmtree(skill_dir)
+        print(f"已删除：{skill_dir}")
+    else:
+        print(f"如需删除，请手动删除 {skill_dir} 目录")
+
+
 def main():
     parser = argparse.ArgumentParser(description='Skill 文件管理器')
-    parser.add_argument('--action', required=True, choices=['list', 'init', 'combine'])
+    parser.add_argument('--action', required=True, choices=['list', 'init', 'combine', 'close', 'delete', 'destroy'])
     parser.add_argument('--base-dir', default='./crushes', help='基础目录')
     parser.add_argument('--slug', help='暗恋对象代号')
+    parser.add_argument('--delete', action='store_true', help='同时删除文件')
     
     args = parser.parse_args()
     
@@ -418,6 +506,27 @@ def main():
             print("错误：combine 需要 --slug 参数", file=sys.stderr)
             sys.exit(1)
         combine_skill(args.base_dir, args.slug)
+    elif args.action == 'close':
+        if not args.slug:
+            print("错误：close 需要 --slug 参数", file=sys.stderr)
+            sys.exit(1)
+        close_skill(args.base_dir, args.slug, args.delete)
+    elif args.action == 'delete':
+        if not args.slug:
+            print("错误：delete 需要 --slug 参数", file=sys.stderr)
+            sys.exit(1)
+        skill_dir = os.path.join(args.base_dir, args.slug)
+        if os.path.exists(skill_dir):
+            import shutil
+            shutil.rmtree(skill_dir)
+            print(f"已删除：{skill_dir}")
+        else:
+            print(f"目录不存在：{skill_dir}")
+    elif args.action == 'destroy':
+        if not args.slug:
+            print("错误：destroy 需要 --slug 参数", file=sys.stderr)
+            sys.exit(1)
+        close_skill(args.base_dir, args.slug, delete=True)
 
 
 if __name__ == '__main__':
