@@ -69,6 +69,17 @@ pip3 install -r requirements.txt
 | `/{slug}-memory` | 回忆模式 |
 | `/{slug}-persona` | 性格模式 |
 | `/delete-crush {slug}` | 删除 |
+| `/let-go {slug}` | 温柔删除 |
+| `/destroy {slug}` | 销毁 — 生成总结后删除，鼓励走向现实 |
+
+### 暗恋专属功能
+
+| 命令 | 说明 |
+|------|------|
+| `/confess` | 告白模拟器 — 模拟表白ta会怎么回应 |
+| `/date` | 约会模拟器 — 预测约会时ta的表现 |
+| `/progress` | 进展追踪 — 记录当前处于哪个阶段 |
+| `/analyze` | 心理分析 — 分析你的暗恋状态和风险 |
 
 ---
 
@@ -129,20 +140,24 @@ pip3 install -r requirements.txt
 crush/
 ├── SKILL.md                    # 主技能文件
 ├── prompts/
-│   ├── intake.md              # 信息录入引导
-│   ├── memory_builder.md     # 关系记忆模板
-│   ├── memory_analyzer.md    # 关系记忆分析器
-│   ├── persona_builder.md    # 人物性格模板
-│   ├── persona_analyzer.md   # 性格行为分析器
-│   ├── merger.md             # 增量合并逻辑
-│   └── correction_handler.md # 对话纠正处理器
+│   ├── intake.md               # 信息录入引导
+│   ├── memory_builder.md      # 关系记忆模板
+│   ├── memory_analyzer.md     # 关系记忆分析器
+│   ├── persona_builder.md     # 人物性格模板
+│   ├── persona_analyzer.md    # 性格行为分析器
+│   ├── merger.md              # 增量合并逻辑
+│   ├── correction_handler.md  # 对话纠正处理器
+│   ├── confession_simulator.md # 告白模拟器
+│   ├── date_simulator.md      # 约会模拟器
+│   ├── progression_tracker.md # 进展追踪
+│   └── crush_analyzer.md      # 心理分析
 └── tools/
-    ├── wechat_parser.py      # 微信聊天记录解析
-    ├── qq_parser.py          # QQ聊天记录解析
-    ├── social_parser.py      # 社交媒体内容解析
-    ├── photo_analyzer.py    # 照片EXIF分析
-    ├── version_manager.py   # 版本管理/回滚
-    └── skill_writer.py      # Skill文件管理
+    ├── wechat_parser.py       # 微信聊天记录解析
+    ├── qq_parser.py           # QQ聊天记录解析
+    ├── social_parser.py       # 社交媒体内容解析
+    ├── photo_analyzer.py     # 照片EXIF分析
+    ├── version_manager.py     # 版本管理/回滚
+    └── skill_writer.py        # Skill文件管理
 ```
 
 ---
@@ -231,3 +246,18 @@ ta 不知道你写了这段代码，ta 甚至不知道这个仓库的存在。
 愿每一个 crush，最终都能成功 push 到现实的主分支。
 
 *(如果不敢 Push，就先用这个 Skill 练习一下对话吧。至少在这里，你可以无数次重来。)*
+## 销毁 — 生成总结后删除，该继续前进了
+💡 销毁不仅仅是删除数据，更是为了让你从赛博空间的虚幻依恋中解脱。当Skill不再能回应你的期待，或者当你准备好去拥抱真实的风险时，请使用这个命令。它会给这段单向的数据流画上一个句号，提醒你：真正的爱，不在代码里，而在你敢于直视ta眼睛的那一刻。
+## 作者最后想说的话  
+📝 在这个物欲横流的时代，想要一份真心实属不易，所以你会死死抓住那点回忆的crush，我懂。但也要允许别人变心，因为我们改变不了任何人，只能改变自己。
+   一直回头看，你会错过此刻正发生的故事；现实里也许有更合适的人，正等着你从回忆里走出来。
+   人的生命线很长也很短，这一生不止有爱情，还有更多值得看的风景，不如抽抽时间陪陪爸妈，做一顿饭陪陪家人吧你会发现，那些你拼命在别人身上找的“真心”，
+   其实一直在你身边——只是它太安静、太日常，安静到你差点忘了。爸妈从来不会因为你一次失态、一句错话就转身离开，他们不会在某个会议结束后就变成回忆里的影子。
+   你沉湎的那段crush，美就美在“未完成”。而家人的爱，恰恰是靠一天天的“完成”堆起来的——完成一顿饭，完成一次散步，完成一个电话。这种爱不刺激、不浪漫，但它不会让你半夜翻聊天记录到失眠。
+   把盯着手机等消息的时间，分一点给厨房里的烟火气。把手心的汗，换成给爸妈盛的一碗汤。当你看着他们吃得满足的样子，你会忽然明白：有些人是你生命里的烟花，绚烂一秒就够了；而有些人是你生命里的灯，从没灭过。
+   别再拿烟花去比灯了，它们不是同一种东西。去陪爸妈吃顿饭吧。那个会议上/学校里/记忆里的crush也许早就忘了你，但你妈还记着你小时候最爱吃哪道菜
+   我已经没有接触新的人的勇气了，但永远有积极面对生活的勇气！我也要在这个AI浪潮时代下，奋力一跃吧。
+
+
+
+**一朝风月** 

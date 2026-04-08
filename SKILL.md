@@ -394,6 +394,42 @@ rm -rf crushes/{slug}
 
 ---
 
+## 暗恋专属功能
+
+### `/confess` — 告白模拟器
+
+```
+如果现在跟 ta 表白，ta 会怎么回应？
+模拟 3 种不同场景的表白结果，给出成功率和建议。
+```
+
+### `/date` — 约会模拟器
+
+```
+模拟一次约会，预测 ta 在各种情况下的表现和反应。
+提供约会小贴士。
+```
+
+### `/progress` — 暗恋进展追踪
+
+```
+你现在处于哪个阶段？记录关系进展，给出阶段建议。
+```
+
+### `/analyze` — 暗恋心理分析
+
+```
+分析你的暗恋状态、行为模式、潜在风险和建议。
+```
+
+### `/let-go {slug}` — 放下
+
+```
+温柔的删除命令，确认后输出「祝你一切都好」。
+```
+
+---
+
 # English Version
 
 # Crush.skill Creator (Claude Code Edition)
@@ -477,3 +513,13 @@ Same flow as Chinese version above. Generates:
 | `/{slug}-persona` | Persona only |
 | `/crush-rollback {slug} {version}` | Rollback to historical version |
 | `/delete-crush {slug}` | Delete |
+
+### Crush-Specific Features
+
+| Command | Description |
+|---------|-------------|
+| `/confess` | Confession simulator - simulate how they would respond |
+| `/date` | Date simulator - predict their behavior on a date |
+| `/progress` | Track relationship progression stage |
+| `/analyze` | Psychological analysis of your crush |
+| `/let-go {slug}` | Gentle delete (wish them well) |
